@@ -1,11 +1,36 @@
+import Link from "next/link";
+
+function GameItem({
+  name,
+  href,
+  children,
+}: {
+  name: string;
+  href: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      className="group flex flex-col justify-center text-xl text-slate-900"
+    >
+      <div className="aspect-square rounded-lg bg-slate-200 hover:bg-slate-300">
+        {children}
+      </div>
+      <span className="min-w-fit group-hover:underline">{name}</span>
+    </Link>
+  );
+}
+
 export default function Home() {
   return (
-    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
-      <main className="row-start-2 flex flex-col items-center gap-[32px] sm:items-start">
-        <h1 className="text-xl text-cyan-600">Games</h1>
-        <div>{/* grid list of games */}</div>
-      </main>
-      <footer className="row-start-3 flex flex-wrap items-center justify-center gap-[24px]"></footer>
-    </div>
+    <main className="flex min-h-screen flex-col items-center gap-[32px] p-24">
+      <h1 className="text-3xl text-slate-800">Games</h1>
+      <div className="grid flex-1 grid-cols-2 items-center justify-center gap-[32px]">
+        <GameItem href="/snake" name="Snake Game">
+          image here
+        </GameItem>
+      </div>
+    </main>
   );
 }
