@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { generateFood, moveSnake, handleKeyDown } from "../snakeUtils";
 import { Point, Direction, GridCellProps } from "../types";
+import { GameContext } from "../provider";
 
 const GridSize = 20;
 
@@ -27,6 +28,11 @@ export default function SnakeGrid() {
   const [food, setFood] = useState<Point>();
   const [direction, setDirection] = useState<Direction>("LEFT");
 
+  const { gameOver, setGameOver, score, incrementScore } =
+    useContext(GameContext);
+
+  console.log("gameOver", gameOver);
+
   useEffect(() => {
     setFood(generateFood(GridSize));
     setSnake(initSnake);
@@ -34,7 +40,15 @@ export default function SnakeGrid() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      moveSnake(snake, setSnake, food, setFood, direction, GridSize);
+      moveSnake(
+        snake,
+        setSnake,
+        food,
+        setFood,
+        direction,
+        GridSize,
+        incrementScore,
+      );
     }, 180);
     return () => clearInterval(interval);
   }, [snake, direction, food]);

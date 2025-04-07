@@ -10,9 +10,10 @@ export const moveSnake = (
   snake: Point[],
   setSnake: React.Dispatch<React.SetStateAction<Point[]>>,
   food: Point | undefined,
-  setFood: React.Dispatch<React.SetStateAction<Point>>,
+  setFood: React.Dispatch<React.SetStateAction<Point | undefined>>,
   direction: Direction,
   gridSize: number,
+  incrementScore: () => void,
 ) => {
   const newSnake = [...snake];
   const head = { ...newSnake[0] };
@@ -47,6 +48,7 @@ export const moveSnake = (
   newSnake.unshift(head);
   if (food && head.row === food.row && head.col === food.col) {
     setFood(generateFood(gridSize));
+    incrementScore();
   } else {
     newSnake.pop();
   }
