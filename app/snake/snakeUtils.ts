@@ -1,19 +1,17 @@
-export const generateFood = (gridSize: number) => {
+import { Point, Direction } from "./types";
+
+export const generateFood = (gridSize: number): Point => {
   const x = Math.floor(Math.random() * gridSize);
   const y = Math.floor(Math.random() * gridSize);
   return { row: x, col: y };
 };
 
 export const moveSnake = (
-  snake: { row: number; col: number }[],
-  setSnake: React.Dispatch<
-    React.SetStateAction<{ row: number; col: number }[]>
-  >,
-  food: { row: number; col: number } | undefined,
-  setFood: React.Dispatch<
-    React.SetStateAction<{ row: number; col: number } | undefined>
-  >,
-  direction: "UP" | "DOWN" | "LEFT" | "RIGHT",
+  snake: Point[],
+  setSnake: React.Dispatch<React.SetStateAction<Point[]>>,
+  food: Point | undefined,
+  setFood: React.Dispatch<React.SetStateAction<Point>>,
+  direction: Direction,
   gridSize: number,
 ) => {
   const newSnake = [...snake];
@@ -58,10 +56,8 @@ export const moveSnake = (
 
 export const handleKeyDown = (
   event: React.KeyboardEvent<HTMLDivElement>,
-  direction: "UP" | "DOWN" | "LEFT" | "RIGHT",
-  setDirection: React.Dispatch<
-    React.SetStateAction<"UP" | "DOWN" | "LEFT" | "RIGHT">
-  >,
+  direction: Direction,
+  setDirection: React.Dispatch<React.SetStateAction<Direction>>,
 ) => {
   switch (event.key) {
     case "ArrowUp":
