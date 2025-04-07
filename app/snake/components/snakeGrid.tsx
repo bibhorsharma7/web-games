@@ -47,6 +47,7 @@ export default function SnakeGrid() {
         setFood,
         direction,
         GridSize,
+        setGameOver,
         incrementScore,
       );
     }, 180);

@@ -13,6 +13,7 @@ export const moveSnake = (
   setFood: React.Dispatch<React.SetStateAction<Point | undefined>>,
   direction: Direction,
   gridSize: number,
+  setGameOver: React.Dispatch<React.SetStateAction<boolean>>,
   incrementScore: () => void,
 ) => {
   const newSnake = [...snake];
@@ -42,6 +43,7 @@ export const moveSnake = (
     head.row >= gridSize ||
     head.col >= gridSize
   ) {
+    setGameOver(true);
     return; // Stop movement if collision occurs
   }
 
