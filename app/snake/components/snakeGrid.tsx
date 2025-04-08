@@ -3,7 +3,12 @@
 import { useContext, useEffect, useState } from "react";
 import { generateFood, moveSnake, handleKeyDown } from "../snakeUtils";
 import { Point, Direction, GridCellProps } from "../types";
-import { GameContext } from "../provider";
+import {
+  GameStatusContext,
+  GameStatusContexType,
+  ScoreContext,
+  ScoreContextType,
+} from "../provider";
 
 const GridSize = 20;
 
@@ -28,10 +33,8 @@ export default function SnakeGrid() {
   const [food, setFood] = useState<Point>();
   const [direction, setDirection] = useState<Direction>("LEFT");
 
-  const { gameOver, setGameOver, score, incrementScore } =
-    useContext(GameContext);
-
-  console.log("gameOver", gameOver);
+  const { incrementScore } = useContext(ScoreContext) as ScoreContextType;
+  const { setGameOver } = useContext(GameStatusContext) as GameStatusContexType;
 
   useEffect(() => {
     setFood(generateFood(GridSize));

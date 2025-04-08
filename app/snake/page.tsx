@@ -1,12 +1,18 @@
 "use client";
 
-import Provider, { GameContext } from "./provider";
+import Provider, {
+  GameStatusContext,
+  GameStatusContexType,
+  ScoreContext,
+  ScoreContextType,
+} from "./provider";
 import SnakeGrid from "./components/snakeGrid";
 import { useContext } from "react";
 
 function Score() {
-  const { gameOver, setGameOver, score, incrementScore } =
-    useContext(GameContext);
+  const { score } = useContext(ScoreContext) as ScoreContextType;
+  const { gameOver } = useContext(GameStatusContext) as GameStatusContexType;
+
   return (
     <div>
       <div className="flex flex-row space-x-2">

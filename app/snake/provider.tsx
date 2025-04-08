@@ -1,7 +1,20 @@
 "use client";
-import { useState, createContext } from "react";
+import { useState, createContext, Dispatch, SetStateAction } from "react";
 
-export const GameContext = createContext({});
+export type ScoreContextType = {
+  score: number;
+  incrementScore: () => void;
+};
+
+export type GameStatusContexType = {
+  gameOver: boolean;
+  setGameOver: Dispatch<SetStateAction<boolean>>;
+};
+
+export const ScoreContext = createContext<ScoreContextType | null>(null);
+export const GameStatusContext = createContext<GameStatusContexType | null>(
+  null,
+);
 
 export default function Provider({ children }: { children: React.ReactNode }) {
   const [score, setScore] = useState(0);
@@ -13,10 +26,10 @@ export default function Provider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <GameContext.Provider
-      value={{ gameOver, setGameOver, score, incrementScore }}
-    >
-      {children}
-    </GameContext.Provider>
+    <ScoreContext.Provider value={{ score, incrementScore }}>
+      <GameStatusContext.Provider value={{ gameOver, setGameOver }}>
+        {children}
+      </GameStatusContext.Provider>
+    </ScoreContext.Provider>
   );
 }
