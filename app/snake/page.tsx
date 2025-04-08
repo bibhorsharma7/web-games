@@ -5,7 +5,7 @@ import Provider, {
   GameStatusContexType,
   ScoreContext,
   ScoreContextType,
-} from "./provider";
+} from "./providers";
 import SnakeGrid from "./components/snakeGrid";
 import { useContext } from "react";
 

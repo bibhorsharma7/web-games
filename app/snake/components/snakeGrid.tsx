@@ -8,7 +8,7 @@ import {
   GameStatusContexType,
   ScoreContext,
   ScoreContextType,
-} from "../provider";
+} from "../providers";
 
 const GridSize = 20;
 
